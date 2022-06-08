@@ -1,38 +1,106 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+  --green: #2eb875;
+  --blue: #3e54de;
+  --white: white;
+  --light-gray: rgba(245, 244, 244, 0.836);
+  --secondary: rgb(145, 142, 142);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+html {
+  font-family: sans-serif;
+  font-size: 16px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body {
+  background-color: var(--light-gray);
+}
+
+main {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.btn {
+  cursor: pointer;
+  background: none;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  padding: 0.8rem 1rem;
+  font-weight: bold;
+  border-radius: 15px;
+  transition: ease-in-out 0.3s;
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 15rem;
 }
 
-.App-link {
-  color: #61dafb;
+.btn span {
+  font-size: 30px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 1px 3px 3px 0px rgb(0 0 0 / 27%);
+}
+
+.bg-green {
+  background-color: var(--green);
+}
+
+.bg-blue {
+  background-color: var(--blue);
+}
+.bg-white {
+  background-color: var(--white);
+}
+
+.text-white {
+  color: var(--white);
+}
+
+.text-green {
+  color: var(--green);
+}
+
+.text-blue {
+  color: var(--blue);
+}
+
+.text-secondary {
+  color: var(--secondary);
+}
+
+input,
+textarea {
+  border-radius: 15px;
+  border: 1px solid #ccc;
+  outline: 0;
+  padding: 1rem;
+}
+
+@media only screen and (max-width: 600px) {
+  html {
+    font-size: 0.7em;
   }
-  to {
-    transform: rotate(360deg);
+
+  .header-container {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .page-description {
+    flex-basis: auto;
+    flex-direction: column;
+  }
+
+  .page-description > * {
+    margin-bottom: 1rem;
   }
 }

@@ -1,0 +1,14 @@
+.search-container {
+  display: flex;
+  padding: 3rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.search-container > h1 {
+  flex-basis: 30%;
+}
+
+.search-container > input {
+  flex-basis: 70%;
+}
