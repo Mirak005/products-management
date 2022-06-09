@@ -14,12 +14,12 @@ function ProductDetails() {
   const [allProducts, isAllProductsLoading] = useProducts()
 
   const filterProductsByTag = () => {
-    const relatedTages = product.tags
+    const relatedTages = product.tags || []
 
     const filterProducts = []
 
     for (let i = 0; i < allProducts.length; i++) {
-      if (filterProducts.length === 3) {
+      if (filterProducts.length === 3 || relatedTages.length ===0) {
         break
       }
       const currentTags = allProducts[i].tags

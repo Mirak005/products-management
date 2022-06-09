@@ -21,12 +21,8 @@ const Button: React.FC<Props> = ({
 }) => {
   if (!to) {
     return (
-      <button className='btn bg-green text-white'>
-        {icon && (
-          <span className='text-white' style={{ fontSize: '16px' }}>
-            {iconHtmlCode[icon]}
-          </span>
-        )}
+      <button onClick={onClick} className='btn bg-green text-white'>
+        {icon && <span className='text-white'>{iconHtmlCode[icon]}</span>}
         {children}
       </button>
     )
@@ -34,7 +30,14 @@ const Button: React.FC<Props> = ({
 
   return (
     <Link to={to} className='btn bg-green text-white'>
-      {icon && <span className='text-white'>{iconHtmlCode[icon]}</span>}
+      {icon && (
+        <span
+          className='text-white'
+          style={{ textAlign: children ? undefined : 'center' }}
+        >
+          {iconHtmlCode[icon]}
+        </span>
+      )}
       {children}
     </Link>
   )
