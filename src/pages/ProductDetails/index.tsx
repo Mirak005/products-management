@@ -1,15 +1,15 @@
-import { Link } from 'react-router-dom'
+import {  useParams } from 'react-router-dom'
+
+import ProductDetailsCard from '../../components/ProductDetailCard'
+
+import './index.css'
 
 function ProductDetails() {
+  let { productId } = useParams()
+
   return (
     <>
-      <main>
-        <h2>Who are we?</h2>
-        <p>That feels like an existential question, don't you think?</p>
-      </main>
-      <nav>
-        <Link to='/'>Home</Link>
-      </nav>
+      <ProductDetailsCard productId={productId!} />
     </>
   )
 }

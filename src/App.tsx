@@ -12,7 +12,7 @@ function App() {
       <main>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='about' element={<ProductDetails />} />
+          <Route path='/product/:productId' element={<ProductDetails />} />
         </Routes>
       </main>
     </React.Fragment>

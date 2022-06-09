@@ -15,8 +15,8 @@ export const getProducts = async (
 }
 
 export const getProductById = async (id: string): Promise<IProduct> => {
-  const response = (await api.get(`/proructs?${id}`)) as ProductResponse
-  return response.product
+  const { data } = await api.get(`/products/${id}`)
+  return data.product
 }
 
 export const updateProduct = async (updatedProduct: IProduct) => {

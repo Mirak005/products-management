@@ -1,0 +1,16 @@
+[class*='chip-'] {
+  padding: 0.2rem 1.5rem;
+  border-radius: 20px;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.chip-green {
+  background-color: var(--light-green);
+  color: var(--green);
+}
+
+.chip-blue {
+  background-color: var(--light-blue);
+  color: var(--blue);
+}

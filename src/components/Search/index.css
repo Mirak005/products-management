@@ -1,14 +1,12 @@
 .search-container {
   display: flex;
-  padding: 3rem;
+  justify-content: space-around;
+  padding: 3rem 0;
   flex-wrap: wrap;
   align-items: center;
 }
 
-.search-container > h1 {
-  flex-basis: 30%;
-}
-
 .search-container > input {
   flex-basis: 70%;
+  margin-right: 2rem;
 }

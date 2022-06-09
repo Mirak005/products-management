@@ -26,14 +26,14 @@ function Home() {
   }
 
   return (
-    <>
+    <main>
       <Search onChange={handleSearchChange} searchText={searchText} />
       <ProductList
         productList={handleFilter(products)}
         isLoading={isLoading}
         hasMore={hasMore}
       />
-    </>
+    </main>
   )
 }
 
