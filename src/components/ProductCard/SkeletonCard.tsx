@@ -2,55 +2,29 @@ import Skeleton from '../Skeleton'
 
 import './index.css'
 
+const cardImageStyle = { width: '100%' }
+const cardHeaderStyle = { height: '20px', width: '20%', borderRadius: '15px' }
+const paragraphStyle = {
+  height: '5px',
+  padding: '0.5rem',
+  marginBottom: '5px',
+  borderRadius: '15px',
+  width: '80%',
+}
+
 const SkeletonCard = () => {
   return (
     <div className='card-container'>
-      <Skeleton style={{ width: '100%' }}></Skeleton>
+      <Skeleton style={cardImageStyle}></Skeleton>
       <div className='card-header'>
-        <Skeleton
-          style={{ height: '20px', width: '20%', borderRadius: '15px' }}
-        ></Skeleton>
-        <Skeleton
-          style={{ height: '20px', width: '20%', borderRadius: '15px' }}
-        ></Skeleton>
+        <Skeleton style={cardHeaderStyle}></Skeleton>
+        <Skeleton style={cardHeaderStyle}></Skeleton>
       </div>
       <p>
-        <Skeleton
-          style={{
-            height: '5px',
-            width: '80%',
-            padding: '0.5rem',
-            marginBottom: '5px',
-            borderRadius: '15px',
-          }}
-        ></Skeleton>
-        <Skeleton
-          style={{
-            height: '5px',
-            width: '60%',
-            padding: '0.5rem',
-            marginBottom: '5px',
-            borderRadius: '15px',
-          }}
-        ></Skeleton>
-        <Skeleton
-          style={{
-            height: '5px',
-            width: '80%',
-            padding: '0.5rem',
-            marginBottom: '5px',
-            borderRadius: '15px',
-          }}
-        ></Skeleton>
-        <Skeleton
-          style={{
-            height: '5px',
-            width: '40%',
-            padding: '0.5rem',
-            marginBottom: '5px',
-            borderRadius: '15px',
-          }}
-        ></Skeleton>
+        <Skeleton style={paragraphStyle}></Skeleton>
+        <Skeleton style={{ ...paragraphStyle, width: '60%' }}></Skeleton>
+        <Skeleton style={paragraphStyle}></Skeleton>
+        <Skeleton style={{ ...paragraphStyle, width: '40%' }}></Skeleton>
       </p>
     </div>
   )

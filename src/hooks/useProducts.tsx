@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
+
 import { getProducts } from '../services/productApi'
+
 import { IProduct } from '../types'
 
 type State = [
@@ -23,14 +25,17 @@ const useProducts = (): State => {
       setIsLoading(false)
       return count
     } catch (error) {
+      setIsLoading(false)
       setHasError(true)
       return 0
     }
   }, [])
 
   useEffect(() => {
-    loadProducts().then((totalCount) => setTotal(totalCount))
-  }, [loadProducts])
+    if (total === 0) {
+      loadProducts().then((totalCount) => setTotal(totalCount))
+    }
+  }, [loadProducts, total])
 
   return [data, isLoading, hasError, total, loadProducts]
 }

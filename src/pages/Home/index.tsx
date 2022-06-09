@@ -4,11 +4,13 @@ import ProductList from '../../components/ProductList'
 import Search from '../../components/Search'
 import useInfiniteScroll from '../../hooks/useInfiniteScroll'
 import useProducts from '../../hooks/useProducts'
+
 import { IProduct } from '../../types'
 
 function Home() {
   const [searchText, setSearchText] = useState('')
 
+  //TODO: implement Alert comonent
   const [products, isLoading, hasError, total, loadData] = useProducts()
   const [hasMore] = useInfiniteScroll(total, 15, loadData)
 

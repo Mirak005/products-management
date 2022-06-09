@@ -1,7 +1,9 @@
 import React from 'react'
-import { IProduct } from '../../types'
+
 import { ProductCard } from '../ProductCard'
-import SkeletonCard from '../ProductCard/SkeletonCard'
+import ListLoading from './SkeletonProductList'
+
+import { IProduct } from '../../types'
 
 import './index.css'
 
@@ -17,13 +19,7 @@ const ProductList: React.FC<Props> = ({
   hasMore,
 }) => {
   if (isLoading) {
-    return (
-      <div className='product-list'>
-        {Array.from({ length: 15 }).map((el) => (
-          <SkeletonCard />
-        ))}
-      </div>
-    )
+    return <ListLoading size={9} />
   }
   return (
     <div className='product-list'>
@@ -31,11 +27,7 @@ const ProductList: React.FC<Props> = ({
         <ProductCard product={product} key={product._id + Math.random()} />
       ))}
 
-      {hasMore && (
-        <>
-          <SkeletonCard />
-        </>
-      )}
+      {hasMore && <ListLoading size={3} />}
     </div>
   )
 }
