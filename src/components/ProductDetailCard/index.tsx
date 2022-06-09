@@ -1,25 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Button from '../../components/Button'
 import Chip from '../../components/Chip'
-import { getProductById } from '../../services/productApi'
 import { IProduct } from '../../types'
 import { roundNumber } from '../../utils'
 
 import './index.css'
 
 type Props = {
-  productId: string
+  product: IProduct
 }
 
-const ProductDetailsCard: React.FC<Props> = ({ productId }) => {
-  const [product, setProduct] = useState<Partial<IProduct>>({})
-
-  useEffect(() => {
-    if (productId) {
-      getProductById(productId).then((data) => setProduct(data))
-    }
-  }, [productId])
-
+const ProductDetailsCard: React.FC<Props> = ({ product }) => {
   return (
     <div className='product-details'>
       <div className='image-container'>
