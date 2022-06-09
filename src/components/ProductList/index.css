@@ -1,7 +1,7 @@
 .product-list {
   display: flex;
-  justify-content: center;
-  align-items: baseline;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
   margin: auto;
 }

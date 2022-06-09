@@ -1,5 +1,7 @@
 import React from 'react'
+import {  useNavigate } from 'react-router-dom'
 import { IProduct } from '../../types'
+import { roundNumber } from '../../utils'
 
 import './index.css'
 
@@ -8,14 +10,25 @@ type Props = {
 }
 
 export const ProductCard: React.FC<Props> = ({ product }) => {
+  const navigate = useNavigate()
+
+  const handleGoTo = () => {
+    navigate(`/product/${product._id}`, { replace: true })
+  }
+
   return (
-    <div className='card-container'>
+    <div className='card-container' onClick={handleGoTo}>
       <div
         className='image-container'
         style={{ backgroundImage: `url(${product.image})` }}
       ></div>
-      <h3>{product.name}</h3>
-      <span className='text-secondary'>{`${product.price} €`}</span>
+      <div className='card-header'>
+        <h2>{product.name}</h2>
+        <h2 className='text-secondary'>{`${roundNumber(
+          product.price,
+          2
+        )}€`}</h2>
+      </div>
       <p className='text-secondary'>{product.description}</p>
     </div>
   )

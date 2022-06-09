@@ -14,3 +14,6 @@
   flex-basis: 50%;
 }
 
+.brand {
+  cursor: pointer;
+}

@@ -9,7 +9,7 @@
   --blue: #3e54de;
   --white: white;
   --light-gray: rgba(245, 244, 244, 0.836);
-  --secondary: rgb(145, 142, 142);
+  --secondary: #6e7191;
 }
 
 html {
@@ -24,6 +24,10 @@ body {
 main {
   max-width: 1200px;
   margin: auto;
+}
+
+p {
+  line-height: 1.35;
 }
 
 .btn {
@@ -87,10 +91,6 @@ textarea {
 }
 
 @media only screen and (max-width: 600px) {
-  html {
-    font-size: 0.7em;
-  }
-
   .header-container {
     flex-direction: column;
     justify-content: center;

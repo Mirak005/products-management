@@ -7,13 +7,11 @@ const api = axios.create({
 
 export const getProducts = async (
   startPage: number = 0
-): Promise<IProduct[]> => {
-  const {data} = (await api.get(
-    `/products?start=${startPage}`
-  )) 
+): Promise<ProductsResponse> => {
+  const { data } = await api.get(`/products?start=${startPage}`)
   console.log({ data })
 
-  return data.products
+  return data
 }
 
 export const getProductById = async (id: string): Promise<IProduct> => {

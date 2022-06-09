@@ -1,21 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import ProductList from '../../components/ProductList'
 import Search from '../../components/Search'
-
-import { getProducts } from '../../services/productApi'
-import { IProduct } from '../../types'
+import useInfiniteScroll from '../../hooks/useInfiniteScroll'
+import useProducts from '../../hooks/useProducts'
 
 function Home() {
   const [searchText, setSearchText] = useState('')
-  const [products, setProducts] = useState<IProduct[]>([])
 
-  useEffect(() => {
-    getProducts().then((result) => {
-      console.log({ result })
-      setProducts(result)
-    })
-  }, [])
+  const [products, isLoading, hasError, total, loadData] = useProducts()
+  useInfiniteScroll(total, 15, loadData)
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e?.target.value) {
@@ -26,7 +20,7 @@ function Home() {
   return (
     <>
       <Search onChange={handleSearchChange} searchText={searchText} />
-      <ProductList productList={products} />
+      <ProductList productList={products} isLoading={isLoading} />
     </>
   )
 }
