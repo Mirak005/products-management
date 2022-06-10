@@ -1,0 +1,49 @@
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.row:first-child {
+  flex-basis: 80%;
+}
+
+.form-container {
+  width: 90%;
+  margin: auto;
+  border: solid;
+  padding: 1rem;
+}
+
+.form-group {
+  padding: 2rem;
+}
+.form-group > input {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 4px;
+  outline: none;
+}
+
+.form-header {
+  display: flex;
+  align-items: center;
+}
+
+.form-header > span,
+button {
+  color: white;
+  font-size: 30px;
+  padding: 0.5rem 1rem;
+  background-color: rgb(45, 214, 121);
+  border-radius: 15px;
+  margin-right: 10px;
+}
+
+@media (max-width: 460px) {
+  .row {
+    flex-wrap: wrap;
+  }
+  .row > * {
+    width: 100%;
+  }
+}

@@ -1,14 +1,14 @@
-import { useNavigate } from 'react-router-dom'
-import Button from '../Button'
+import { useNavigate } from 'react-router-dom';
+import Button from '../Button';
 
-import './index.css'
+import './index.css';
 
 const Header = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleGoTo = () => {
-    navigate(`/`, { replace: true })
-  }
+    navigate(`/`, { replace: true });
+  };
   return (
     <header className='header-container bg-white'>
       <div className='page-description'>
@@ -18,9 +18,11 @@ const Header = () => {
 
         <h4>🏠 Catalogues des Produits</h4>
       </div>
-      <Button icon='plus'> Ajouter un produit</Button>
+      <Button icon='plus' to='/products/create'>
+        Ajouter un produit
+      </Button>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

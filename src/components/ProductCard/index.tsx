@@ -14,7 +14,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
   const navigate = useNavigate()
 
   const handleGoTo = () => {
-    navigate(`/product/${product._id}`, { replace: true })
+    navigate(`/products/${product._id}`, { replace: true })
   }
 
   return (

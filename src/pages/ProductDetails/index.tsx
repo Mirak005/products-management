@@ -1,36 +1,37 @@
-import { useParams } from 'react-router-dom'
-import { ProductCard } from '../../components/ProductCard'
+import { useParams } from 'react-router-dom';
+import { ProductCard } from '../../components/ProductCard';
+import SkeletonCard from '../../components/ProductCard/SkeletonCard';
 
-import ProductDetailsCard from '../../components/ProductDetailCard'
-import SkeletonDetailCard from '../../components/ProductDetailCard/SkeletonDetailCard'
-import useProduct from '../../hooks/useProduct'
-import useProducts from '../../hooks/useProducts'
+import ProductDetailsCard from '../../components/ProductDetailCard';
+import SkeletonDetailCard from '../../components/ProductDetailCard/SkeletonDetailCard';
+import useProduct from '../../hooks/useProduct';
+import useProducts from '../../hooks/useProducts';
 
-import './index.css'
+import './index.css';
 
 function ProductDetails() {
-  let { productId } = useParams()
-  const [product, isLoading, hasError] = useProduct(productId as string)
-  const [allProducts, isAllProductsLoading] = useProducts()
+  let { productId } = useParams();
+  const [product, isLoading, hasError] = useProduct(productId as string);
+  const [allProducts, isAllProductsLoading] = useProducts();
 
   const filterProductsByTag = () => {
-    const relatedTages = product.tags || []
+    const relatedTages = product.tags || [];
 
-    const filterProducts = []
+    const filterProducts = [];
 
     for (let i = 0; i < allProducts.length; i++) {
-      if (filterProducts.length === 3 || relatedTages.length ===0) {
-        break
+      if (filterProducts.length === 3 || relatedTages.length === 0) {
+        break;
       }
-      const currentTags = allProducts[i].tags
-      const match = currentTags.find((tag) => relatedTages.includes(tag))
+      const currentTags = allProducts[i].tags;
+      const match = currentTags.find((tag) => relatedTages.includes(tag));
       if (match) {
-        filterProducts.push(allProducts[i])
+        filterProducts.push(allProducts[i]);
       }
     }
 
-    return filterProducts
-  }
+    return filterProducts;
+  };
 
   return (
     <>
@@ -51,13 +52,21 @@ function ProductDetails() {
             paddingTop: '1rem',
           }}
         >
-          {filterProductsByTag().map((el) => (
-            <ProductCard key={el._id} product={el} />
-          ))}
+          {isAllProductsLoading ? (
+            <>
+              <SkeletonCard></SkeletonCard>
+              <SkeletonCard></SkeletonCard>
+              <SkeletonCard></SkeletonCard>
+            </>
+          ) : (
+            filterProductsByTag().map((el) => (
+              <ProductCard key={el._id} product={el} />
+            ))
+          )}
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default ProductDetails
+export default ProductDetails;

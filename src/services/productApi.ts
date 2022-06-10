@@ -5,11 +5,13 @@ const api = axios.create({
   baseURL: 'https://technical-test-frontend.herokuapp.com/api',
 })
 
+//https://technical-test-frontend.herokuapp.com/api/products?tags[]=burger&vegan 
+//https://technical-test-frontend.herokuapp.com/api/products?name=burger
+//TODO add optional query for tags  and add filter by name
 export const getProducts = async (
   startPage: number = 0
 ): Promise<ProductsResponse> => {
   const { data } = await api.get(`/products?start=${startPage}`)
-  console.log({ data })
 
   return data
 }
