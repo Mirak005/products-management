@@ -36,13 +36,13 @@ export default function AddEditForm({ productData }: Props) {
           alert('submit');
         }}
       >
-        <div className='row'>
-          <div className='form-group'>
+        <div className='flex'>
+          <div className='form-group col-8'>
             <label>Nom du produit</label>
             <br />
             <input type='text' />
           </div>
-          <div className='form-group'>
+          <div className='form-group col-4'>
             <label>Prix</label>
             <br />
             <input type='text' />
@@ -51,7 +51,7 @@ export default function AddEditForm({ productData }: Props) {
         <div className='form-group'>
           <label>Description</label>
           <br />
-          <input type='text' />
+          <textarea name='description'rows={10}></textarea>
         </div>
         <div className='form-group'>
           <label>Image</label>

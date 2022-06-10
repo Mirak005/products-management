@@ -1,11 +1,6 @@
-.row {
-  display: flex;
-  align-items: center;
-}
 
-.row:first-child {
-  flex-basis: 80%;
-}
+
+
 
 .form-container {
   width: 90%;
@@ -17,12 +12,7 @@
 .form-group {
   padding: 2rem;
 }
-.form-group > input {
-  width: 100%;
-  padding: 1rem;
-  border-radius: 4px;
-  outline: none;
-}
+
 
 .form-header {
   display: flex;
@@ -40,10 +30,5 @@ button {
 }
 
 @media (max-width: 460px) {
-  .row {
-    flex-wrap: wrap;
-  }
-  .row > * {
-    width: 100%;
-  }
+
 }
