@@ -3,6 +3,11 @@
   border-radius: 20px;
   font-weight: bold;
   margin-right: 5px;
+  display: inline;
+}
+
+[class*='chip-'] > * {
+  padding: 5px;
 }
 
 .chip-green {

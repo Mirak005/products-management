@@ -1,14 +1,27 @@
-import React from 'react'
+import React from 'react';
 
-import './index.css'
+import './index.css';
 
 type Props = {
-  color: 'blue' | 'green'
-  text: string
-}
+  color: 'blue' | 'green';
+  text: string;
+  onClick?: () => void;
+};
 
-const Chip: React.FC<Props> = ({ color, text }) => {
-  return <span className={`chip-${color}`}>{text}</span>
-}
+const Chip: React.FC<Props> = ({ color, text, onClick }) => {
+  const handleClick = () => {
+    onClick && onClick();
+  };
+  return (
+    <div className={`chip-${color}`} onClick={handleClick}>
+      <span>{text}</span>
+      {onClick && (
+        <span className={`text-${color}`}>
+          <b>X</b>
+        </span>
+      )}
+    </div>
+  );
+};
 
-export default Chip
+export default Chip;

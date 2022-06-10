@@ -1,6 +1,7 @@
 import * as React from 'react';
 import useForm from '../../hooks/useForm';
 import { IProduct } from '../../types';
+import Button from '../Button';
 import './index.css';
 
 type Props = {
@@ -24,7 +25,7 @@ export default function AddEditForm({ productData }: Props) {
   return (
     <div className='form-container'>
       <div className='form-header'>
-        <span>+</span>
+        <Button icon='plus'></Button>
         <div>
           <h3>Ajouter un produit</h3>
           <span>lorem</span>
@@ -36,13 +37,13 @@ export default function AddEditForm({ productData }: Props) {
           alert('submit');
         }}
       >
-        <div className='flex'>
-          <div className='form-group col-8'>
+        <div className='form-group-row'>
+          <div className='form-group'>
             <label>Nom du produit</label>
             <br />
             <input type='text' />
           </div>
-          <div className='form-group col-4'>
+          <div className='form-group'>
             <label>Prix</label>
             <br />
             <input type='text' />
@@ -51,7 +52,7 @@ export default function AddEditForm({ productData }: Props) {
         <div className='form-group'>
           <label>Description</label>
           <br />
-          <textarea name='description'rows={10}></textarea>
+          <textarea name='description' rows={10}></textarea>
         </div>
         <div className='form-group'>
           <label>Image</label>
