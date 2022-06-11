@@ -1,10 +1,13 @@
 import * as React from 'react';
+
 import useForm from '../../hooks/useForm';
-import { createProduct, updateProduct } from '../../services/productApi';
-import { IProduct } from '../../types';
 import Alert from '../Alert';
 import Button from '../Button';
 import Chip from '../Chip';
+
+import { createProduct, updateProduct } from '../../services/productApi';
+import { IProduct } from '../../types';
+
 import './index.css';
 
 type Props = {
@@ -157,7 +160,7 @@ export default function AddEditForm({ productData }: Props) {
               type='number'
               value={formData.price}
               name='price'
-              step={0.1}
+              step={0.01}
               required
               min={0}
               onChange={handleChangeWithErrors}

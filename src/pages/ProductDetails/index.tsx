@@ -1,4 +1,5 @@
-import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ProductCard } from '../../components/ProductCard';
 import SkeletonCard from '../../components/ProductCard/SkeletonCard';
 
@@ -12,27 +13,25 @@ import './index.css';
 function ProductDetails() {
   let { productId } = useParams();
   const [product, isLoading, hasError] = useProduct(productId as string);
-  const { products: allProducts, isLoading: isAllProductsLoading } =
-    useProducts();
+  const {
+    products: allProducts,
+    isLoading: isAllProductsLoading,
+    handlTagsChange,
+  } = useProducts();
 
-  const filterProductsByTag = () => {
-    const relatedTages = product.tags || [];
-
-    const filterProducts = [];
-
-    for (let i = 0; i < allProducts.length; i++) {
-      if (filterProducts.length === 3 || relatedTages.length === 0) {
-        break;
-      }
-      const currentTags = allProducts[i].tags;
-      const match = currentTags.find((tag) => relatedTages.includes(tag));
-      if (match) {
-        filterProducts.push(allProducts[i]);
-      }
+  useEffect(() => {
+    if (!isLoading && product.tags.length) {
+      handlTagsChange(product.tags);
     }
+  }, [product, handlTagsChange, isLoading]);
 
-    return filterProducts;
-  };
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (hasError) {
+      navigate(`/404`, { replace: true });
+    }
+  }, [hasError, navigate]);
 
   return (
     <>
@@ -60,9 +59,7 @@ function ProductDetails() {
               <SkeletonCard></SkeletonCard>
             </>
           ) : (
-            filterProductsByTag().map((el) => (
-              <ProductCard key={el._id} product={el} />
-            ))
+            allProducts.map((el) => <ProductCard key={el._id} product={el} />)
           )}
         </div>
       </div>

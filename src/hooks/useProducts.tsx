@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 import { getProducts } from '../services/productApi';
 
@@ -13,6 +13,7 @@ type State = {
   hasError: boolean;
   loadProducts: () => Promise<void>;
   handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handlTagsChange: (tags: string[]) => void;
 };
 
 const useProducts = (step = 15): State => {
@@ -22,12 +23,17 @@ const useProducts = (step = 15): State => {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
   const [hasMore, setHasMore] = useState(false);
-  const [search, setsearch] = useState('');
 
-  const [timeoutSearch, setTimeoutSearch] = useState<any>(0);
+  const [search, setsearch] = useState('');
+  const [searchTags, setSearchTags] = useState<string[]>([]);
+
+  const timeout = useRef<any>(null);
+
+  const handlTagsChange = (tags: string[]) => {
+    setSearchTags(tags);
+  };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    clearTimeout(timeoutSearch);
     setsearch(e?.target.value);
   };
 
@@ -58,14 +64,19 @@ const useProducts = (step = 15): State => {
     }
   }, [total, startIndex, search, hasMore, step]);
 
-  const fetchProducts = async (search?: string) => {
-    const params: Record<string, string> = {};
-    if (search) {
-      params.search = search;
-    }
+  const fetchProducts = async (params?: {
+    search?: string;
+    tags?: string[];
+  }) => {
     try {
       setIsLoading(true);
       const { products, count } = await getProducts(0, params);
+
+      if (params?.tags) {
+        setData(products.slice(0, 3));
+        setIsLoading(false);
+        return;
+      }
 
       if (count > products.length) {
         setHasMore(true);
@@ -87,11 +98,19 @@ const useProducts = (step = 15): State => {
     if (!search) {
       fetchProducts();
     } else {
-      clearTimeout(timeoutSearch);
-      setTimeoutSearch(setTimeout(() => fetchProducts(search), 1000));
+      clearTimeout(timeout.current);
+      timeout.current = setTimeout(() => {
+        fetchProducts({ search });
+      }, 1000);
     }
-  }, [search, timeoutSearch]);
+    return () => clearTimeout(timeout.current);
+  }, [search]);
 
+  useEffect(() => {
+    if (searchTags.length) {
+      fetchProducts({ tags: searchTags });
+    }
+  }, [searchTags]);
   return {
     products: data,
     isLoading,
@@ -101,6 +120,7 @@ const useProducts = (step = 15): State => {
     search,
     loadProducts,
     handleSearchChange,
+    handlTagsChange,
   };
 };
 
