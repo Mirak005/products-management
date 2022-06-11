@@ -73,7 +73,7 @@ const useProducts = (step = 15): State => {
       const { products, count } = await getProducts(0, params);
 
       if (params?.tags) {
-        setData(products.slice(0, 3));
+        setData(products);
         setIsLoading(false);
         return;
       }
@@ -95,22 +95,21 @@ const useProducts = (step = 15): State => {
 
   useEffect(() => {
     setStartIndex(0);
-    if (!search) {
-      fetchProducts();
-    } else {
+    if (searchTags.length) {
+      fetchProducts({ tags: searchTags });
+    } else if (search) {
       clearTimeout(timeout.current);
       timeout.current = setTimeout(() => {
         fetchProducts({ search });
       }, 1000);
+    } else {
+      fetchProducts();
     }
-    return () => clearTimeout(timeout.current);
-  }, [search]);
+    return () => {
+      clearTimeout(timeout.current);
+    };
+  }, [search, searchTags]);
 
-  useEffect(() => {
-    if (searchTags.length) {
-      fetchProducts({ tags: searchTags });
-    }
-  }, [searchTags]);
   return {
     products: data,
     isLoading,

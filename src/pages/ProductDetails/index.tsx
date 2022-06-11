@@ -6,6 +6,7 @@ import SkeletonCard from '../../components/ProductCard/SkeletonCard';
 
 import ProductDetailsCard from '../../components/ProductDetailCard';
 import SkeletonDetailCard from '../../components/ProductDetailCard/SkeletonDetailCard';
+import ProductList from '../../components/ProductList';
 import useProduct from '../../hooks/useProduct';
 import useProducts from '../../hooks/useProducts';
 
@@ -42,28 +43,13 @@ function ProductDetails() {
 
       <div>
         <h2>Articles Similaires :</h2>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            paddingTop: '1rem',
-          }}
-        >
-          {isAllProductsLoading ? (
-            <>
-              <SkeletonCard></SkeletonCard>
-              <SkeletonCard></SkeletonCard>
-              <SkeletonCard></SkeletonCard>
-            </>
-          ) : allProducts.length === 0 || product.tags.length === 0 ? (
-            <EmptyData />
-          ) : (
-            allProducts.map((product) => (
-              <ProductCard key={product._id} product={product} />
-            ))
-          )}
-        </div>
+        <ProductList
+          isLoading={isAllProductsLoading}
+          hasMore={false}
+          productList={allProducts
+            .filter((product) => product._id !== productId)
+            .slice(0, 3)}
+        />
       </div>
     </>
   );

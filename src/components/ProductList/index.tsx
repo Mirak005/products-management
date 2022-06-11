@@ -20,7 +20,7 @@ const ProductList: React.FC<Props> = ({
   hasMore,
 }) => {
   if (isLoading) {
-    return <ListLoading size={9} />;
+    return <ListLoading size={3} />;
   }
   return (
     <div className='product-list'>
