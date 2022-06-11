@@ -33,12 +33,12 @@ export default function AddEditForm({ productData }: Props) {
         await updateProduct(formData as IProduct);
       } else {
         await createProduct(formData);
+        setFormData(initForm);
       }
       setWarning({
         msg: `Product ${productData ? 'updated' : 'added'} with success`,
         status: 'success',
       });
-      setFormData(initForm);
     } catch (error) {
       setWarning({ msg: 'Something went wrong', status: 'error' });
     }
@@ -117,10 +117,11 @@ export default function AddEditForm({ productData }: Props) {
     }
   };
 
-  const removeTag = () => {
+  const removeTag = (tag: string) => {
     const filterdTags = formData.tags.filter(
       (currentTag) => currentTag !== tag
     );
+
     setFormData((prevForm) => ({
       ...prevForm,
       tags: filterdTags,
@@ -215,7 +216,7 @@ export default function AddEditForm({ productData }: Props) {
               key={i}
               text={tag}
               color={i % 2 === 0 ? 'green' : 'blue'}
-              onClick={removeTag}
+              onClick={() => removeTag(tag)}
             />
           ))}
         </div>

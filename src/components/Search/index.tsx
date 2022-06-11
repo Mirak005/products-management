@@ -15,7 +15,7 @@ const Search: React.FC<Props> = ({ searchText, onChange = () => {} }) => {
       <input
         value={searchText}
         type='text'
-        placeholder='Search a product'
+        placeholder='🔍 Search a product'
         onChange={onChange}
       />
     </div>

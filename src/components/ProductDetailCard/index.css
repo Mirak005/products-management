@@ -29,7 +29,9 @@
 }
 
 .tags {
-  margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem;
 }
 
 .product-description {
