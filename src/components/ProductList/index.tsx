@@ -1,17 +1,18 @@
-import React from 'react'
+import React from 'react';
 
-import { ProductCard } from '../ProductCard'
-import ListLoading from './SkeletonProductList'
+import { ProductCard } from '../ProductCard';
+import ListLoading from './SkeletonProductList';
 
-import { IProduct } from '../../types'
+import { IProduct } from '../../types';
 
-import './index.css'
+import './index.css';
+import EmptyData from '../EmptyData';
 
 type Props = {
-  productList: IProduct[]
-  isLoading: boolean
-  hasMore: boolean
-}
+  productList: IProduct[];
+  isLoading: boolean;
+  hasMore: boolean;
+};
 
 const ProductList: React.FC<Props> = ({
   productList = [],
@@ -19,17 +20,21 @@ const ProductList: React.FC<Props> = ({
   hasMore,
 }) => {
   if (isLoading) {
-    return <ListLoading size={9} />
+    return <ListLoading size={9} />;
   }
   return (
     <div className='product-list'>
-      {productList.map((product) => (
-        <ProductCard product={product} key={product._id + Math.random()} />
-      ))}
+      {productList.length === 0 ? (
+        <EmptyData />
+      ) : (
+        productList.map((product) => (
+          <ProductCard product={product} key={product._id + Math.random()} />
+        ))
+      )}
 
       {hasMore && <ListLoading size={3} />}
     </div>
-  )
-}
+  );
+};
 
-export default ProductList
+export default ProductList;

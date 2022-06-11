@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import EmptyData from '../../components/EmptyData';
 import { ProductCard } from '../../components/ProductCard';
 import SkeletonCard from '../../components/ProductCard/SkeletonCard';
 
@@ -58,6 +59,8 @@ function ProductDetails() {
               <SkeletonCard></SkeletonCard>
               <SkeletonCard></SkeletonCard>
             </>
+          ) : allProducts.length === 0 || product.tags.length === 0 ? (
+            <EmptyData />
           ) : (
             allProducts.map((el) => <ProductCard key={el._id} product={el} />)
           )}
