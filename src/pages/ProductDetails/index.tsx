@@ -12,7 +12,8 @@ import './index.css';
 function ProductDetails() {
   let { productId } = useParams();
   const [product, isLoading, hasError] = useProduct(productId as string);
-  const [allProducts, isAllProductsLoading] = useProducts();
+  const { products: allProducts, isLoading: isAllProductsLoading } =
+    useProducts();
 
   const filterProductsByTag = () => {
     const relatedTages = product.tags || [];

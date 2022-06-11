@@ -1,15 +1,15 @@
-import * as React from 'react'
-import useForm from '../../hooks/useForm'
-import { createProduct } from '../../services/productApi'
-import { IProduct } from '../../types'
-import Alert from '../Alert'
-import Button from '../Button'
-import Chip from '../Chip'
-import './index.css'
+import * as React from 'react';
+import useForm from '../../hooks/useForm';
+import { createProduct, updateProduct } from '../../services/productApi';
+import { IProduct } from '../../types';
+import Alert from '../Alert';
+import Button from '../Button';
+import Chip from '../Chip';
+import './index.css';
 
 type Props = {
-  productData?: IProduct
-}
+  productData?: IProduct;
+};
 
 const initForm: Omit<IProduct, '_id'> = {
   tags: [],
@@ -17,26 +17,33 @@ const initForm: Omit<IProduct, '_id'> = {
   description: '',
   image: '',
   price: '',
-}
+};
 
 const FormError = ({ msg }: { msg: string }) => (
   <p style={{ color: 'red' }}>{msg}</p>
-)
+);
 
 export default function AddEditForm({ productData }: Props) {
   const handleSubmitForm = async () => {
     try {
-      await createProduct(formData)
-      setWarning({ msg: 'Product Added with success', status: 'success' })
+      if (productData) {
+        await updateProduct(formData as IProduct);
+      } else {
+        await createProduct(formData);
+      }
+      setWarning({
+        msg: `Product ${productData ? 'updated' : 'added'} with success`,
+        status: 'success',
+      });
+      setFormData(initForm);
     } catch (error) {
-      setWarning({ msg: 'Something went wrong', status: 'error' })
+      setWarning({ msg: 'Something went wrong', status: 'error' });
     }
-  }
-  const { formData, setFormData, handleInputChange, handleSubmit } = useForm(
-    productData || initForm,
-    handleSubmitForm
-  )
-  const [tag, setTag] = React.useState('')
+  };
+  const { formData, setFormData, handleInputChange, handleSubmit } = useForm<
+    IProduct | Omit<IProduct, '_id'>
+  >(productData || initForm, handleSubmitForm);
+  const [tag, setTag] = React.useState('');
 
   const [errors, setErrors] = React.useState<Record<string, string | boolean>>({
     tag: '',
@@ -45,72 +52,77 @@ export default function AddEditForm({ productData }: Props) {
     image: '',
     price: '',
     tagExist: false,
-  })
+  });
 
-  const [warning, setWarning] = React.useState<any>({
+  const [warning, setWarning] = React.useState<{
+    msg: string;
+    status?: 'error' | 'success' | '';
+  }>({
     msg: '',
     status: '',
-  })
+  });
 
   React.useEffect(() => {
-    return () => setFormData(initForm)
-  }, [])
+    return () => setFormData(initForm);
+  }, [setFormData]);
 
   React.useEffect(() => {
     if (warning.msg) {
       setTimeout(() => {
-        setWarning({ msg: '', status: '' })
-      }, 1000)
+        setWarning({ msg: '', status: '' });
+      }, 3000);
     }
-  }, [warning.msg])
+  }, [warning.msg]);
 
   const handleChangeWithErrors = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const feildName = e.target.name
-    const errorMessage = e.target.validationMessage
+    const feildName = e.target.name;
+    const errorMessage = e.target.validationMessage;
     if (errorMessage) {
-      setErrors((prevErros) => ({ ...prevErros, [feildName]: errorMessage }))
+      setErrors((prevErros) => ({ ...prevErros, [feildName]: errorMessage }));
     } else {
-      setErrors((prevErros) => ({ ...prevErros, [feildName]: '' }))
+      setErrors((prevErros) => ({ ...prevErros, [feildName]: '' }));
     }
-    handleInputChange(e)
-  }
+    handleInputChange(e);
+  };
 
   const handleChangeTag = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const errorMessage = e.target.validationMessage
+    const errorMessage = e.target.validationMessage;
     if (errorMessage) {
-      setErrors((prevErros) => ({ ...prevErros, tag: errorMessage }))
+      setErrors((prevErros) => ({ ...prevErros, tag: errorMessage }));
     } else {
-      setErrors((prevErros) => ({ ...prevErros, tag: '' }))
+      setErrors((prevErros) => ({ ...prevErros, tag: '' }));
     }
-    setTag(e.target.value)
-  }
+    setTag(e.target.value);
+  };
 
   const handleAddTag = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      e.preventDefault()
+      e.preventDefault();
 
       if (formData.tags.includes(tag)) {
-        setErrors((prevErrors) => ({ ...prevErrors, tagExist: true }))
+        setErrors((prevErrors) => ({ ...prevErrors, tagExist: true }));
       } else {
-        setErrors((prevErrors) => ({ ...prevErrors, tagExist: false }))
+        setErrors((prevErrors) => ({ ...prevErrors, tagExist: false }));
         setFormData((prevForm) => ({
           ...prevForm,
           tags: [...prevForm.tags, tag],
-        }))
-        setTag('')
+        }));
+        setTag('');
       }
     }
-  }
+  };
 
   const removeTag = () => {
-    const filterdTags = formData.tags.filter((currentTag) => currentTag !== tag)
+    const filterdTags = formData.tags.filter(
+      (currentTag) => currentTag !== tag
+    );
     setFormData((prevForm) => ({
       ...prevForm,
       tags: filterdTags,
-    }))
-  }
+    }));
+  };
 
   return (
     <div className='form-container'>
@@ -118,7 +130,7 @@ export default function AddEditForm({ productData }: Props) {
       <div className='form-header'>
         <Button icon='plus'></Button>
         <div>
-          <h3>Ajouter un produit</h3>
+          <h3>{productData ? 'Modifier' : 'Ajouter un produit'}</h3>
           <span>lorem</span>
         </div>
       </div>
@@ -204,8 +216,8 @@ export default function AddEditForm({ productData }: Props) {
             />
           ))}
         </div>
-        <Button type='submit'>Ajouter</Button>
+        <Button type='submit'>{productData ? 'Modifier' : 'Ajouter'}</Button>
       </form>
     </div>
-  )
+  );
 }

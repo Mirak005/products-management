@@ -1,16 +1,18 @@
 export interface IResponse {
-  count: number
+  count: number;
 }
 
 export interface IProduct {
-  _id: string
-  tags: string[]
-  name: string
-  description: string
-  image: string
-  price: string
+  _id: string;
+  tags: string[];
+  name: string;
+  description: string;
+  image: string;
+  price: string;
 }
 
-export type ProductsResponse = IResponse & { products: IProduct[] }
+export type ProductsResponse = IResponse & { products: IProduct[] };
 
-export type ProductResponse = IResponse & { product: IProduct }
+export type ProductResponse = IResponse & { product: IProduct };
+
+export type QueryProducts = Record<string, string | string[]>;

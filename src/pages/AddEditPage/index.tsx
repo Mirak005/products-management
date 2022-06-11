@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import AddEditForm from '../../components/AddEditForm';
-
-import { IProduct } from '../../types';
+import useProduct from '../../hooks/useProduct';
 
 function CreateEdit() {
   const { productId } = useParams();
+
+  const [productData, loading] = useProduct(productId as string);
+
+  console.log({ productData });
+
+  if (loading) {
+    return <main>loading</main>;
+  }
+
   return (
     <main>
-      <AddEditForm />
+      {productId ? <AddEditForm productData={productData} /> : <AddEditForm />}
     </main>
   );
 }

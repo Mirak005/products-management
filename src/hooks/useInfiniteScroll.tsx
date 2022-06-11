@@ -1,43 +1,38 @@
-import { useCallback, useState, useLayoutEffect } from 'react'
+import { useCallback, useState, useLayoutEffect } from 'react';
 
-type State = boolean[]
+type State = [boolean];
 
 const useInfiniteScroll = <T,>(
   total: number,
-  step: number,
-  loadMore: (start: number) => Promise<T>
+  loadMore: () => Promise<T>
 ): State => {
-  const [startItem, setStartItem] = useState<number>(step)
-  const [hasMore, setHasMore] = useState(true)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleScroll = useCallback(
     async (e: any) => {
       if (isLoading) {
-        return
+        return;
       }
 
-      if (!(startItem <= total)) return setHasMore(false)
-      const scrollHeight = e.target.documentElement.scrollHeight
+      const scrollHeight = e.target.documentElement.scrollHeight;
       const currentHeight = Math.ceil(
         e.target.documentElement.scrollTop + window.innerHeight
-      )
+      );
       if (currentHeight + 1 >= scrollHeight) {
-        setIsLoading(true)
-        await loadMore(startItem)
-        setStartItem(startItem + step)
-        setIsLoading(false)
+        setIsLoading(true);
+        await loadMore();
+        setIsLoading(false);
       }
     },
-    [loadMore, startItem, step, total, isLoading]
-  )
+    [isLoading, loadMore]
+  );
 
   useLayoutEffect(() => {
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll);
 
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [handleScroll])
-  return [hasMore, isLoading]
-}
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleScroll]);
+  return [isLoading];
+};
 
-export default useInfiniteScroll
+export default useInfiniteScroll;
