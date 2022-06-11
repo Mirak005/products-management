@@ -1,21 +1,21 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { IProduct } from '../../types'
-import { roundNumber } from '../../utils'
+import { IProduct } from '../../types';
+import { roundNumber } from '../../utils';
 
-import './index.css'
+import './index.css';
 
 type Props = {
-  product: IProduct
-}
+  product: IProduct;
+};
 
-export const ProductCard: React.FC<Props> = ({ product }) => {
-  const navigate = useNavigate()
+const ProductCard: React.FC<Props> = ({ product }) => {
+  const navigate = useNavigate();
 
   const handleGoTo = () => {
-    navigate(`/products/${product._id}`, { replace: true })
-  }
+    navigate(`/products/${product._id}`, { replace: true });
+  };
 
   return (
     <div className='card-container' onClick={handleGoTo}>
@@ -32,5 +32,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
       </div>
       <p className='text-secondary'>{product.description}</p>
     </div>
-  )
-}
+  );
+};
+
+export default ProductCard;

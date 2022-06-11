@@ -1,9 +1,10 @@
 import React from 'react'
 import Button from '../../components/Button'
 import Chip from '../../components/Chip'
-import { IProduct } from '../../types'
+
 import { roundNumber } from '../../utils'
 
+import { IProduct } from '../../types'
 import './index.css'
 
 type Props = {

@@ -1,18 +1,10 @@
-import axios, { AxiosRequestConfig } from 'axios';
-import {
-  IProduct,
-  ProductsResponse,
-  ProductResponse,
-  QueryProducts,
-} from '../types';
+import axios from 'axios';
+import { IProduct, ProductsResponse, QueryProducts } from '../types';
 
 const api = axios.create({
   baseURL: 'https://technical-test-frontend.herokuapp.com/api',
 });
 
-//https://technical-test-frontend.herokuapp.com/api/products?tags[]=burger&vegan
-//https://technical-test-frontend.herokuapp.com/api/products?search=burger
-//TODO add optional query for tags  and add filter by name
 export const getProducts = async (
   startPage: number = 0,
   queryData?: QueryProducts

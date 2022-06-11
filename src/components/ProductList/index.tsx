@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { ProductCard } from '../ProductCard';
+import ProductCard from '../ProductCard';
+import EmptyData from '../EmptyData';
 import ListLoading from './SkeletonProductList';
 
 import { IProduct } from '../../types';
 
 import './index.css';
-import EmptyData from '../EmptyData';
 
 type Props = {
   productList: IProduct[];

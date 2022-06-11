@@ -13,6 +13,5 @@ export interface IProduct {
 
 export type ProductsResponse = IResponse & { products: IProduct[] };
 
-export type ProductResponse = IResponse & { product: IProduct };
 
 export type QueryProducts = Record<string, string | string[]>;

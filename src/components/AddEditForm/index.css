@@ -27,7 +27,6 @@ button {
 
 .form-group-row {
   display: flex;
-  flex-wrap: wrap;
 }
 
 .form-group-row > .form-group:first-child {
@@ -35,6 +34,9 @@ button {
 }
 
 @media only screen and (max-width: 768px) {
+  .form-group-row {
+    flex-wrap: wrap;
+  }
   .form-group-row > * {
     width: 100% !important;
   }

@@ -7,8 +7,6 @@ function CreateEdit() {
 
   const [productData, loading] = useProduct(productId as string);
 
-  console.log({ productData });
-
   if (loading) {
     return <main>loading</main>;
   }

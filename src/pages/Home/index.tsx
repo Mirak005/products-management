@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from 'react';
-
 import ProductList from '../../components/ProductList';
 import Search from '../../components/Search';
 import useInfiniteScroll from '../../hooks/useInfiniteScroll';
 import useProducts from '../../hooks/useProducts';
 
-import { IProduct } from '../../types';
-
 function Home() {
-  //TODO: implement Alert comonent
   const {
     products,
     isLoading,
@@ -18,9 +13,8 @@ function Home() {
     loadProducts,
     handleSearchChange,
   } = useProducts();
-  useInfiniteScroll(total || 0, loadProducts);
 
-  //Todo implement request filter by tag
+  useInfiniteScroll(total || 0, loadProducts);
 
   return (
     <main>

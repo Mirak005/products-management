@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect, useState, KeyboardEvent, ChangeEvent } from 'react';
 
 import useForm from '../../hooks/useForm';
 import Alert from '../Alert';
@@ -46,9 +46,9 @@ export default function AddEditForm({ productData }: Props) {
   const { formData, setFormData, handleInputChange, handleSubmit } = useForm<
     IProduct | Omit<IProduct, '_id'>
   >(productData || initForm, handleSubmitForm);
-  const [tag, setTag] = React.useState('');
+  const [tag, setTag] = useState('');
 
-  const [errors, setErrors] = React.useState<Record<string, string | boolean>>({
+  const [errors, setErrors] = useState<Record<string, string | boolean>>({
     tag: '',
     name: '',
     description: '',
@@ -57,7 +57,7 @@ export default function AddEditForm({ productData }: Props) {
     tagExist: false,
   });
 
-  const [warning, setWarning] = React.useState<{
+  const [warning, setWarning] = useState<{
     msg: string;
     status?: 'error' | 'success' | '';
   }>({
@@ -65,11 +65,11 @@ export default function AddEditForm({ productData }: Props) {
     status: '',
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     return () => setFormData(initForm);
   }, [setFormData]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (warning.msg) {
       setTimeout(() => {
         setWarning({ msg: '', status: '' });
@@ -78,7 +78,7 @@ export default function AddEditForm({ productData }: Props) {
   }, [warning.msg]);
 
   const handleChangeWithErrors = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const feildName = e.target.name;
     const errorMessage = e.target.validationMessage;
@@ -90,7 +90,7 @@ export default function AddEditForm({ productData }: Props) {
     handleInputChange(e);
   };
 
-  const handleChangeTag = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeTag = (e: ChangeEvent<HTMLInputElement>) => {
     const errorMessage = e.target.validationMessage;
     if (errorMessage) {
       setErrors((prevErros) => ({ ...prevErros, tag: errorMessage }));
@@ -100,7 +100,7 @@ export default function AddEditForm({ productData }: Props) {
     setTag(e.target.value);
   };
 
-  const handleAddTag = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleAddTag = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       e.preventDefault();
 

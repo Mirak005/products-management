@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import './App.css';
+
 import Home from './pages/Home';
 import ProductDetails from './pages/ProductDetails';
 import Header from './components/Header';
 import CreateEdit from './pages/AddEditPage';
 import NotFound from './pages/404';
+
+import './App.css';
 
 function App() {
   return (
