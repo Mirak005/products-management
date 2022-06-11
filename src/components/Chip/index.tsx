@@ -1,27 +1,27 @@
-import React from 'react';
+import React from 'react'
 
-import './index.css';
+import './index.css'
 
 type Props = {
-  color: 'blue' | 'green';
-  text: string;
-  onClick?: () => void;
-};
+  color: 'blue' | 'green'
+  text: string
+  onClick?: () => void
+}
 
 const Chip: React.FC<Props> = ({ color, text, onClick }) => {
   const handleClick = () => {
-    onClick && onClick();
-  };
+    onClick && onClick()
+  }
   return (
     <div className={`chip-${color}`} onClick={handleClick}>
       <span>{text}</span>
       {onClick && (
-        <span className={`text-${color}`}>
+        <span className={`text-${color}`} style={{ cursor: 'pointer' }}>
           <b>X</b>
         </span>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Chip;
+export default Chip

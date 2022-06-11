@@ -1,8 +1,10 @@
 .form-container {
   width: 90%;
   margin: auto;
-  border: solid;
+  border: 1px solid #ccc;
   padding: 1rem;
+  background-color: var(--white);
+  border-radius: 20px;
 }
 
 .form-group {
@@ -14,14 +16,13 @@
   align-items: center;
 }
 
+.form-header > * {
+  margin: 0 5px;
+}
+
 .form-header > span,
 button {
-  color: white;
-  font-size: 30px;
-  padding: 0.5rem 1rem;
-  background-color: rgb(45, 214, 121);
-  border-radius: 15px;
-  margin-right: 10px;
+  font-size: 25px;
 }
 
 .form-group-row {
@@ -33,10 +34,7 @@ button {
   width: 60%;
 }
 
-/*Responsive layout*/
 @media only screen and (max-width: 768px) {
-  /* For mobile phones: */
-
   .form-group-row > * {
     width: 100% !important;
   }

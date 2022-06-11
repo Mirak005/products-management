@@ -1,29 +1,31 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-import './index.css';
+import './index.css'
 
 type Props = {
-  icon?: 'plus' | 'edit';
-  to?: string;
-  onClick?: () => void;
-  children?: JSX.Element | JSX.Element[] | string | string[];
-};
+  icon?: 'plus' | 'edit'
+  to?: string
+  type?: 'button' | 'submit' | 'reset'
+  children?: JSX.Element | JSX.Element[] | string | string[]
+  onClick?: () => void
+}
 
 const iconHtmlCode = {
   plus: '+',
   edit: '🖉',
-};
+}
 
 const Button: React.FC<Props> = ({
   to = null,
   icon,
   children,
+  type = 'button',
   onClick = () => {},
 }) => {
   if (!to) {
     return (
-      <button onClick={onClick} className='btn bg-green text-white'>
+      <button onClick={onClick} type={type} className='btn bg-green text-white'>
         {icon && (
           <span className={`text-white ${children ? 'icon' : ''}`}>
             {iconHtmlCode[icon]}
@@ -31,7 +33,7 @@ const Button: React.FC<Props> = ({
         )}
         <span>{children}</span>
       </button>
-    );
+    )
   }
 
   return (
@@ -43,7 +45,7 @@ const Button: React.FC<Props> = ({
       )}
       <span>{children}</span>
     </Link>
-  );
-};
+  )
+}
 
-export default Button;
+export default Button
