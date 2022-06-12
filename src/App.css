@@ -18,6 +18,7 @@
 html {
   font-family: sans-serif;
   font-size: 16px;
+  overflow-anchor: none;
 }
 
 body {
