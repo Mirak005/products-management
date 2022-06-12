@@ -65,9 +65,7 @@ export default function AddEditForm({ productData }: Props) {
     status: '',
   });
 
-  useEffect(() => {
-    return () => setFormData(initForm);
-  }, [setFormData]);
+
 
   useEffect(() => {
     if (warning.msg) {
